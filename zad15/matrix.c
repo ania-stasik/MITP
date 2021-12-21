@@ -30,8 +30,8 @@ int getArraySize(int arr[], int x, int y) {
 }
 
 int m_printf(MATRIX matrix) {
-    for (int *i = matrix.arr; i < matrix.arr + matrix.x * matrix.y; ++i) {
-        printf("%d ", *i);
+    for (int i = 0; i < (matrix.x * matrix.y); ++i) {
+        printf("%d ", 5);
     }
     return 0;
 }
