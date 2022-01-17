@@ -1,9 +1,11 @@
 //
-// Created by Ania on 21.12.2021.
+// Created by Ania on 11.01.2022.
 //
 
-#ifndef ZAD15_MATRIX_H
-#define ZAD15_MATRIX_H
+#ifndef ZAD15DIFF_MATRIXDIFF_H
+#define ZAD15DIFF_MATRIXDIFF_H
+
+
 struct MATRIX_S {
     int x; /* liczba wierszy */
     int y; /* liczba kolumn */
@@ -30,4 +32,4 @@ int m_put(MATRIX *, int, int, int);
 
 int m_determinant(MATRIX* ) ;
 
-#endif //ZAD15_MATRIX_H
+#endif //ZAD15DIFF_MATRIXDIFF_H

@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "matrix.h"
+#include "matrixdiff.h"
 
 int main() {
+
     MATRIX matrix = m_create(3, 3);
     m_scanf(&matrix, 3, 3);
     m_printf(matrix);
@@ -11,8 +12,6 @@ int main() {
     m_scanf_(&matrix);
     printf("\n%d\n", m_scanf_(&matrix));
     m_printf(matrix);
-    printf("\n det= %d\n", m_determinant(&matrix));
-    printf("dupa");
     m_remove(&matrix);
     return 0;
 }

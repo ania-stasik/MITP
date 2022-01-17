@@ -1,7 +1,8 @@
 //
-// Created by Ania on 21.12.2021.
+// Created by Ania on 11.01.2022.
 //
-#include "matrix.h"
+
+#include "matrixdiff.h"
 #include <stdio.h>
 #include <malloc.h>
 #include <math.h>
@@ -32,14 +33,9 @@ int getArraySize(int arr[], int x, int y) {
 }
 
 int m_printf(MATRIX matrix) {
-    for (int i = 0; i < matrix.x; i++) {
-        for (int j = 0; j < matrix.y; ++j) {
-            printf("%d ", matrix.arr[i * matrix.y + j]);
-        }
-        printf("\n");
+    for (int i = 0; i < matrix.x * matrix.y; i++) {
+        printf("%d ", matrix.arr[i]);
     }
-
-
     return 0;
 }
 
@@ -83,10 +79,10 @@ int m_put(MATRIX *matrix, int x, int y, int value) {
     return 1;
 }
 
-
 int m_determinant(MATRIX *matrix) {
     int determinant = 0;
-    int column, row, r, c;
+    int column, row;
+    MATRIX Matrix;
 
     if (matrix->x != matrix->y) {
         printf("Macierz nie jest kwadratowa, nie da się obliczyc wyznacznika\n");
@@ -94,27 +90,26 @@ int m_determinant(MATRIX *matrix) {
     } else if (matrix->x == 1) {
         return *(matrix->arr);
     } else if (matrix->x == 2) {
-        return ((*matrix->arr)) * (*(matrix->arr + 3)) - (*(matrix->arr + 1)) * (*(matrix->arr + 2));
+        return ((*matrix->arr)) * (*(matrix->arr + 3)) - (*(matrix->arr + 1)) * ((matrix->arr + 2));
     } else {
-        MATRIX m = m_create((matrix->x - 1), (matrix->x - 1));
-        for (int i = 0; i < matrix->x; i++) {
+        Matrix = m_create((matrix->x - 1), (matrix->x - 1));
+        for (int ingredient = 0; ingredient < matrix->x; ingredient++) {
             column = 0;
-            for (r = 1; r < matrix->y; r++) {
+            for (int row = 1; row < matrix->y; row++) {
                 row = 0;
-                for (c = 0; c < matrix->y; c++) {
-                    if (c == i) {
+                for (int column = 0; column < matrix->x; column++) {
+                    if (column == ingredient) {
                         continue;
-                    } else {
-                        m_put(&m, column, row, m_get(matrix, r, c));
                     }
+                    m_put(&Matrix, column, row, m_get(matrix, row, column));
                     row++;
                 }
                 column++;
             }
-            determinant += (*(matrix->arr + i) * pow(-1, i) * m_determinant(&m));
+            determinant += (*(matrix->arr + ingredient) * pow(-1, ingredient) * m_determinant(&Matrix));
         }
-        m_remove(&m);
     }
+    m_remove(&Matrix);
     return determinant;
 }
 
